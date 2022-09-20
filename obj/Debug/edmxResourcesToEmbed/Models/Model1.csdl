@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MobileShopDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="ad_id" />
+    </Key>
+    <Property Name="ad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ad_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="categories" Relationship="Self.FK__category__ad_id___4E88ABD4" FromRole="admin" ToRole="category" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cat_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cat_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ad_id_fk" Type="Int32" />
+    <Property Name="cat_status" Type="Int32" />
+    <NavigationProperty Name="admin" Relationship="Self.FK__category__ad_id___4E88ABD4" FromRole="category" ToRole="admin" />
+    <NavigationProperty Name="products" Relationship="Self.FK__product__cat_id___571DF1D5" FromRole="category" ToRole="product" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="pdt_id" />
+    </Key>
+    <Property Name="pdt_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pdt_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pdt_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pdt_price" Type="Int32" />
+    <Property Name="pdt_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cat_id_fk" Type="Int32" />
+    <Property Name="pdt_user_id_fk" Type="Int32" />
+    <NavigationProperty Name="category" Relationship="Self.FK__product__cat_id___571DF1D5" FromRole="product" ToRole="category" />
+    <NavigationProperty Name="tbl_user" Relationship="Self.FK__product__pdt_use__5812160E" FromRole="product" ToRole="tbl_user" />
+    <NavigationProperty Name="order_table" Relationship="MobileShopDataModel.FK__order_tab__o_fk___72C60C4A" FromRole="product" ToRole="order_table" />
+    <NavigationProperty Name="tbl_invoice" Relationship="MobileShopDataModel.FK__tbl_invoi__in_fk__6FE99F9F" FromRole="product" ToRole="tbl_invoice" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_user">
+    <Key>
+      <PropertyRef Name="u_id" />
+    </Key>
+    <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="u_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="products" Relationship="Self.FK__product__pdt_use__5812160E" FromRole="tbl_user" ToRole="product" />
+    <NavigationProperty Name="order_table" Relationship="MobileShopDataModel.FK__order_tab__o_fk___73BA3083" FromRole="tbl_user" ToRole="order_table" />
+    <NavigationProperty Name="tbl_invoice" Relationship="MobileShopDataModel.FK__tbl_invoi__in_fk__01142BA1" FromRole="tbl_user" ToRole="tbl_invoice" />
+  </EntityType>
+  <Association Name="FK__category__ad_id___4E88ABD4">
+    <End Role="admin" Type="Self.admin" Multiplicity="0..1" />
+    <End Role="category" Type="Self.category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="admin">
+        <PropertyRef Name="ad_id" />
+      </Principal>
+      <Dependent Role="category">
+        <PropertyRef Name="ad_id_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product__cat_id___571DF1D5">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="cat_id_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product__pdt_use__5812160E">
+    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_user">
+        <PropertyRef Name="u_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="pdt_user_id_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MobileShopDataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tbl_user" EntityType="Self.tbl_user" />
+    <AssociationSet Name="FK__category__ad_id___4E88ABD4" Association="Self.FK__category__ad_id___4E88ABD4">
+      <End Role="admin" EntitySet="admins" />
+      <End Role="category" EntitySet="categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product__cat_id___571DF1D5" Association="Self.FK__product__cat_id___571DF1D5">
+      <End Role="category" EntitySet="categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product__pdt_use__5812160E" Association="Self.FK__product__pdt_use__5812160E">
+      <End Role="tbl_user" EntitySet="tbl_user" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <EntitySet Name="order_table" EntityType="MobileShopDataModel.order_table" />
+    <EntitySet Name="tbl_invoice" EntityType="MobileShopDataModel.tbl_invoice" />
+    <AssociationSet Name="FK__order_tab__o_fk___72C60C4A" Association="MobileShopDataModel.FK__order_tab__o_fk___72C60C4A">
+      <End Role="product" EntitySet="products" />
+      <End Role="order_table" EntitySet="order_table" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_tab__o_fk___73BA3083" Association="MobileShopDataModel.FK__order_tab__o_fk___73BA3083">
+      <End Role="tbl_user" EntitySet="tbl_user" />
+      <End Role="order_table" EntitySet="order_table" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_tab__o_fk___74AE54BC" Association="MobileShopDataModel.FK__order_tab__o_fk___74AE54BC">
+      <End Role="tbl_invoice" EntitySet="tbl_invoice" />
+      <End Role="order_table" EntitySet="order_table" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_invoi__in_fk__6FE99F9F" Association="MobileShopDataModel.FK__tbl_invoi__in_fk__6FE99F9F">
+      <End Role="product" EntitySet="products" />
+      <End Role="tbl_invoice" EntitySet="tbl_invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_invoi__in_fk__01142BA1" Association="MobileShopDataModel.FK__tbl_invoi__in_fk__01142BA1">
+      <End Role="tbl_user" EntitySet="tbl_user" />
+      <End Role="tbl_invoice" EntitySet="tbl_invoice" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="order_table">
+    <Key>
+      <PropertyRef Name="o_id" />
+    </Key>
+    <Property Name="o_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="o_fk_pdt" Type="Int32" />
+    <Property Name="o_fk_user" Type="Int32" />
+    <Property Name="o_fk_invoice" Type="Int32" />
+    <Property Name="o_date" Type="DateTime" Precision="3" />
+    <Property Name="o_qty" Type="Int32" />
+    <Property Name="o_bill" Type="Double" />
+    <Property Name="o_unitprice" Type="Int32" />
+    <NavigationProperty Name="product" Relationship="MobileShopDataModel.FK__order_tab__o_fk___72C60C4A" FromRole="order_table" ToRole="product" />
+    <NavigationProperty Name="tbl_user" Relationship="MobileShopDataModel.FK__order_tab__o_fk___73BA3083" FromRole="order_table" ToRole="tbl_user" />
+    <NavigationProperty Name="tbl_invoice" Relationship="MobileShopDataModel.FK__order_tab__o_fk___74AE54BC" FromRole="order_table" ToRole="tbl_invoice" />
+  </EntityType>
+  <EntityType Name="tbl_invoice">
+    <Key>
+      <PropertyRef Name="in_id" />
+    </Key>
+    <Property Name="in_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="in_fk_user" Type="Int32" />
+    <Property Name="in_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="order_table" Relationship="MobileShopDataModel.FK__order_tab__o_fk___74AE54BC" FromRole="tbl_invoice" ToRole="order_table" />
+    <NavigationProperty Name="product" Relationship="MobileShopDataModel.FK__tbl_invoi__in_fk__6FE99F9F" FromRole="tbl_invoice" ToRole="product" />
+    <Property Name="in_totalbill" Type="Double" />
+    <Property Name="in_fk_us" Type="Int32" />
+    <NavigationProperty Name="tbl_user" Relationship="MobileShopDataModel.FK__tbl_invoi__in_fk__01142BA1" FromRole="tbl_invoice" ToRole="tbl_user" />
+  </EntityType>
+  <Association Name="FK__order_tab__o_fk___72C60C4A">
+    <End Type="MobileShopDataModel.product" Role="product" Multiplicity="0..1" />
+    <End Type="MobileShopDataModel.order_table" Role="order_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="pdt_id" />
+      </Principal>
+      <Dependent Role="order_table">
+        <PropertyRef Name="o_fk_pdt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_tab__o_fk___73BA3083">
+    <End Type="MobileShopDataModel.tbl_user" Role="tbl_user" Multiplicity="0..1" />
+    <End Type="MobileShopDataModel.order_table" Role="order_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_user">
+        <PropertyRef Name="u_id" />
+      </Principal>
+      <Dependent Role="order_table">
+        <PropertyRef Name="o_fk_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_tab__o_fk___74AE54BC">
+    <End Type="MobileShopDataModel.tbl_invoice" Role="tbl_invoice" Multiplicity="0..1" />
+    <End Type="MobileShopDataModel.order_table" Role="order_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_invoice">
+        <PropertyRef Name="in_id" />
+      </Principal>
+      <Dependent Role="order_table">
+        <PropertyRef Name="o_fk_invoice" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_invoi__in_fk__6FE99F9F">
+    <End Type="MobileShopDataModel.product" Role="product" Multiplicity="0..1" />
+    <End Type="MobileShopDataModel.tbl_invoice" Role="tbl_invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="pdt_id" />
+      </Principal>
+      <Dependent Role="tbl_invoice">
+        <PropertyRef Name="in_fk_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_invoi__in_fk__01142BA1">
+    <End Type="MobileShopDataModel.tbl_user" Role="tbl_user" Multiplicity="0..1" />
+    <End Type="MobileShopDataModel.tbl_invoice" Role="tbl_invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_user">
+        <PropertyRef Name="u_id" />
+      </Principal>
+      <Dependent Role="tbl_invoice">
+        <PropertyRef Name="in_fk_us" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

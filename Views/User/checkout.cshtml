@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "checkout";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>checkout</h2>
+
+@if (TempData["cart"] != null)
+{
+    <table class="table table-responsive">
+        <thead>
+
+        <th>ID</th>
+        <th>NAME</th>
+        <th>PRICE</th>
+        <th>QUANTITY</th>
+        <th>TOTAL AMOUNT</th>
+
+        </thead>
+        <tbody>
+            @foreach (var item in TempData["cart"] as List<MobileShopWebsite.Models.cart>)
+            {
+                <tr>
+                    <td>@item.pdt_id</td>
+                    <td>@item.pdt_name</td>
+                    <td>@item.pdt_price</td>
+                    <td>@item.o_qty</td>
+                    <td>@item.o_bill</td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" href="@Url.Action("remove", new { id = @item.pdt_id })">&#10060;</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">Total Bill Amount</td>
+                <td>@TempData["total"]</td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <h3 style="color:red">Cart Is empty.</h3>
+    @Html.ActionLink("Back to index", "Index", "User");
+}
+
+@if (TempData["cart"] != null)
+{
+
+
+               using (Html.BeginForm())
+               {
+                   <input type="submit" value="Shop Now" class="btn btn-primary" /> 
+               }
+}

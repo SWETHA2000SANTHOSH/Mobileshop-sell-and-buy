@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MobileShopWebsite.Models.product>
+@{
+    ViewBag.Title = "ViewProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewProducts</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th> ID</th>
+            <th>NAME</th>
+            <th>PRICE</th>
+            <th>DESCRIPTION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.pdt_id</td>
+                    <td>@item.pdt_name</td>
+                    <td>@item.pdt_price</td>
+                    <td>@item.pdt_desc</td>
+                </tr>
+
+            }
+        }
+    </tbody>
+</table>

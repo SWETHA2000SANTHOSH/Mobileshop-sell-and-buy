@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="024a6bb2e79a4ce393b95448fd80954a" Name="Diagram1">
+        <EntityTypeShape EntityType="MobileShopDataModel.admin" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShopDataModel.category" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShopDataModel.product" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShopDataModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShopDataModel.tbl_user" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="MobileShopDataModel.FK__category__ad_id___4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShopDataModel.FK__product__cat_id___571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShopDataModel.FK__product__pdt_use__5812160E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MobileShopDataModel.order_table" Width="1.5" PointX="9.75" PointY="4.125" />
+        <EntityTypeShape EntityType="MobileShopDataModel.tbl_invoice" Width="1.5" PointX="7.5" PointY="8.5" />
+        <AssociationConnector Association="MobileShopDataModel.FK__order_tab__o_fk___72C60C4A" />
+        <AssociationConnector Association="MobileShopDataModel.FK__order_tab__o_fk___73BA3083" />
+        <AssociationConnector Association="MobileShopDataModel.FK__order_tab__o_fk___74AE54BC" />
+        <AssociationConnector Association="MobileShopDataModel.FK__tbl_invoi__in_fk__6FE99F9F" />
+        <AssociationConnector Association="MobileShopDataModel.FK__tbl_invoi__in_fk__01142BA1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

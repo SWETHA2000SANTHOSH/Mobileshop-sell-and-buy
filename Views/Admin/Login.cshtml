@@ -1,0 +1,51 @@
+﻿@model MobileShopWebsite.Models.admin
+@{
+    ViewBag.Title = "Login";
+}
+
+<html>
+<head>
+    <link href="../../Content/LoginStyle.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    <h2>Admin Login</h2>
+    @using (Html.BeginForm())
+    {
+        <form class="" action="" method="post">
+
+
+            <div class="container">
+                <label for="uname"><b>Username*</b></label>
+                @Html.TextBoxFor(x => x.ad_name, new { @class = "form-control", @placeholder = "Enter Username" })
+                <p style="color:red">@Html.ValidationMessageFor(x => x.ad_name)</p>
+
+
+
+                <label for="psw"><b>Password*</b></label>
+                @Html.PasswordFor(x => x.ad_password, new { @class = "form-control", @placeholder = "Enter Password" })
+                <p style="color:red">@Html.ValidationMessageFor(x => x.ad_password)</p>
+                <br />
+                <div style="padding-left:30px;">
+                    <input type="submit" value="Login" class="btn btn-success btn-block" />
+                </div>
+            </div>
+
+            <div class="form.group">
+                <p style="color:red">@ViewBag.error</p>
+            </div>
+        </form>
+    }
+</body>
+</html>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

@@ -1,0 +1,73 @@
+﻿@model MobileShopWebsite.Models.tbl_user
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        body {
+            background: url(https://cutewallpaper.org/25/animated-white-wallpaper-gif/abstract-white-background-hd-motion-graphics-background-loop-white-video-royalty-free-footages-on-make-a-gif.gif);
+            background-size: cover;
+        }
+
+        .form-login {
+            background: rgba(236,240,241,.90);
+            border-radius: 10px;
+            max-width: 450px;
+            margin: auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        h1 {
+            color: black;
+            font-size: 50px;
+            background: content-box;
+        }
+    </style>
+    <link href="../../Content/LoginStyle.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>User Login</h2>
+    @using (Html.BeginForm())
+    {
+        <form class="" action="" method="post">
+
+
+            <div class="container">
+                <label for="uname"><b>User Email*</b></label>
+                @Html.TextBoxFor(x => x.u_email, new { @class = "form-control", @placeholder = "Enter Email"})
+                <p style="color:red">@Html.ValidationMessageFor(x => x.u_email)</p>
+
+
+
+                <label for="psw"><b>Password*</b></label>
+                @Html.PasswordFor(x => x.u_password, new { @class = "form-control", @placeholder = "Enter Password" })
+                <p style="color:red">@Html.ValidationMessageFor(x => x.u_password)</p>
+                <br />
+                <div style="padding-left:30px;">
+                    <input type="submit" value="Login" class="btn btn-success btn-block" />
+                </div>
+            </div>
+
+            <div class="form.group">
+                <p style="color:red">@ViewBag.error</p>
+            </div>
+        </form>
+    }
+</body>
+</html>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

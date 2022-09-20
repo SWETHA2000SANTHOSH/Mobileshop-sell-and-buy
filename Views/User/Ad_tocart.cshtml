@@ -1,0 +1,29 @@
+﻿@model MobileShopWebsite.Models.product
+@{
+    ViewBag.Title = "Ad_tocart";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <img src="~/Content/img/viewaddbg.jpg" class="img img-responsive" style="width:100%" />
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-8">
+        
+        <table>
+
+            <tr><td><b>@Model.pdt_name</b></td><td><b>ID:@Model.pdt_id</b></td></tr>
+            <tr><td><img src="@Url.Content(@Model.pdt_img)" style="width:300PX; height:250PX" /></td></tr>
+            <tr> <td><b>Price: </b></td> <td>@Model.pdt_price </td> </tr>
+            <tr> <td><b>Product Name: </b></td> <td>@Model.pdt_name </td> </tr>
+            <tr> <td><b>Description: </b></td> <td>@Model.pdt_desc  </td> </tr>
+            <tr><td><b>Quantity:</b></td><td><input type="number" name="qty" value="0" id="qty" min="1" /></td></tr>
+            <tr><td><input type="submit" name="submit" class="btn btn-danger" /></td></tr>
+
+        </table>
+
+    </div>
+}
+
